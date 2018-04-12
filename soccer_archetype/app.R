@@ -105,7 +105,11 @@ ui <- fluidPage(
                            DT::dataTableOutput("player_clust"),
                            plotOutput("cluster")),
                   tabPanel("Player Comparison",
-                           plotOutput("barplot")),
+                           plotOutput("barplot"),
+                           p(""),
+                           strong("THE SEASON OF THE PLAYERS YOU'RE ATTEMPTING TO COMPARE MUST
+                                  BE SELECTED!!! MORE THAN 3-4 PLAYER COMPARISONS AT ONCE BECOMES
+                                  CLUTTERED")),
                   tabPanel("Explanation",
                            plotOutput("PCA"),
                            plotOutput("silhouette"))
