@@ -17,10 +17,11 @@ library(tibble)
 library(NbClust)
 library(corrplot)
 library(DT)
+library(RCurl)
 
+path <- getURL("https://raw.githubusercontent.com/bryce-murphy/soccer_analysis/master/asa_soccer.csv")
 
-soccer <- read_csv("C:/Users/Bryce/Desktop/UMN/ShinnyApp/wtfootball/all_years.csv")
-
+soccer <- read.csv(text = path, stringsAsFactors = F, header = T)
 
 
 futbol <- 
@@ -54,7 +55,7 @@ ui <- fluidPage(
       ),
       checkboxGroupInput(inputId = "years",
                          label = "Select Table Seasons:",
-                         choices = c("2018", "2017", "2016", "2015"),
+                         choices = c("2018", "2017", "2016", "2015", "2014", "2013", "2012", "2011"),
                          selected = c("2018")
       ),
       numericInput(inputId = "minutes",
@@ -92,7 +93,13 @@ ui <- fluidPage(
       
       # Create tabs for table, clustering, and PCA
       tabsetPanel(type = "tabs",
-                  tabPanel("Table", DT::dataTableOutput("table")),
+                  tabPanel("Table", 
+                           p(""),
+                           strong("THE CSV FILE SUPPORTING THIS APP WAS RETRIEVED
+                                  FROM AMERICANSOCCERANALYSIS.COM. I WANT TO THANK
+                                  THEM FOR MAKING THEIR DATA PUBLICLY AVAILABLE!!!"),
+                           p(""),
+                           DT::dataTableOutput("table")),
                   tabPanel("Cluster",
                            tableOutput("medoids"),
                            DT::dataTableOutput("player_clust"),
